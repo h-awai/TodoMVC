@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         add.setOnClickListener {
             itemlist.add(editText.text.toString())
             listView.adapter =  adapter
+            var num = listView.count
+            textView.text = if (num == 1) "1 item left" else "%d items left".format(num)
             adapter.notifyDataSetChanged()
             editText.text.clear()
         }
@@ -27,26 +29,54 @@ class MainActivity : AppCompatActivity() {
         clear.setOnClickListener {
             val position: SparseBooleanArray = listView.checkedItemPositions
             val count = listView.count
+            var num = count
             var item = count - 1
             while (item >= 0) {
                 if (position.get(item))
                 {
                     adapter.remove(itemlist.get(item))
+                    num--
                 }
                 item--
             }
             position.clear()
-            itemlist.clear()
+            textView.text = if (num == 1) "1 item left" else "%d items left".format(num)
             adapter.notifyDataSetChanged()
         }
         all.setOnClickListener {
-            itemlist.get(i)
+            adapter.notifyDataSetChanged()
         }
         active.setOnClickListener {
-            itemlist.get(isSelected)
+            val position: SparseBooleanArray = listView.checkedItemPositions
+            val count = listView.count
+            var num = count
+            var item = count - 1
+            while (item >= 0) {
+                if (!position.get(item))
+                {
+                    adapter.remove(itemlist.get(item))
+                    num--
+                }
+                item--
+            }
+            position.clear()
+            adapter.notifyDataSetChanged()
         }
         completed.setOnClickListener {
-            itemlist.get(!isSelected)
+            val position: SparseBooleanArray = listView.checkedItemPositions
+            val count = listView.count
+            var num = count
+            var item = count - 1
+            while (item >= 0) {
+                if (position.get(item))
+                {
+                    adapter.remove(itemlist.get(item))
+                    num--
+                }
+                item--
+            }
+            position.clear()
+            adapter.notifyDataSetChanged()
         }
     }
 }
@@ -56,7 +86,7 @@ class Model {
     var item: String? = null
 
     fun getItems(): String {
-        return this!!.item.toString()
+        return this.item.toString()
     }
     fun setItems(item: String) {
         this.item = item
