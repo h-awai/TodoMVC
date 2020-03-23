@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import java.util.ArrayList
@@ -42,6 +43,7 @@ class CustomAdapter(private val context: Context, modelArrayList: ArrayList<Mode
 
             holder.checkBox = convertView!!.findViewById(R.id.checkBox) as CheckBox
             holder.tvItem = convertView.findViewById(R.id.textView2) as TextView
+            holder.x = convertView.findViewById(R.id.x) as Button
             convertView.tag = holder
         } else {
             holder = convertView.tag as ViewHolder
@@ -69,6 +71,7 @@ class CustomAdapter(private val context: Context, modelArrayList: ArrayList<Mode
     private inner class ViewHolder {
         var checkBox: CheckBox? = null
         var tvItem: TextView? = null
+        var x: Button? = null
     }
 
     companion object {
