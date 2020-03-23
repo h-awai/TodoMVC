@@ -59,12 +59,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:text="1 item left"
             android:textColor="#4d4d4d"
             app:fontFamily="sans-serif" />
         <Button
